@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Analytics;
+using static UnityEngine.PlayerPrefs;
 
 public class LevelTransitionManager : MonoBehaviour
 {
@@ -31,13 +32,13 @@ public class LevelTransitionManager : MonoBehaviour
     
     private void LoadValuesFromPrefs()
     {
-        _levelGoCount = PlayerPrefs.GetInt(TRANSITION_COUNT_KEY, 0);
+        _levelGoCount = GetInt(TRANSITION_COUNT_KEY, 0);
         _goToLevelText.text = $"Go To Level Count: {_levelGoCount}";
     }
     
     private void OnDestroy()
     {
-        PlayerPrefs.SetInt(TRANSITION_COUNT_KEY,_levelGoCount);
+        SetInt(TRANSITION_COUNT_KEY,_levelGoCount);
         
         _sceneLoader.OnGoToLevel -= AddCount;
     }
